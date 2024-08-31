@@ -1,31 +1,42 @@
 // Do-While Integer Validation Project 1
 
-string? userInput;
+#nullable enable
 
+string? userInput;
 int numericValue = 0;
-bool validNumber = false;
+bool inputValid = false;
+
+Console.WriteLine("Enter an integer value between 5 and 10.");
 
 do
 {
-    Console.WriteLine("Input a numeric value here:");
     userInput = Console.ReadLine();
-    bool isNumeric = int.TryParse(userInput, out numericValue);
 
-    if (isNumeric && (numericValue >= 5) && (numericValue <= 10))
+    if (string.IsNullOrWhiteSpace(userInput))
     {
-        validNumber = true;
-        Console.WriteLine($"You enetered a valid number: {numericValue}");
+        Console.WriteLine("Cannot be left blank.");
     }
-    else if (!isNumeric)
+    else
     {
-        Console.WriteLine("Input is not numeric, please enter a number between 5 and 10.");
-    }
-    else if (numericValue < 5 || numericValue > 10)
-    {
-        Console.WriteLine("Input is not valid, please enter a number between 5 and 10.");
-    }
+        bool isNumeric = int.TryParse(userInput, out numericValue);
 
-} while (!validNumber);
+        if (!isNumeric)
+        {
+            Console.WriteLine("Sorry, you entered a non-numeric value, please try again.");
+        }
+        else if (numericValue < 5 || numericValue > 10)
+        {
+            Console.Write($"You enetered {numericValue}. Please enter a number between 5 and 10.");
+        }
+        else
+        {
+            inputValid = true;
+            Console.WriteLine($"Your input value ({numericValue}) has been accepted.");
+        }
+    }
+} while (!inputValid);
+
+#nullable disable
 
 // Do-While String Validation Project 2
 
