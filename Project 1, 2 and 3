@@ -13,21 +13,18 @@ do
     userInput = Console.ReadLine();
 
     if (string.IsNullOrWhiteSpace(userInput))
-    {
         Console.WriteLine("Cannot be left blank.");
-    }
+
     else
     {
         bool isNumeric = int.TryParse(userInput, out numericValue);
 
         if (!isNumeric)
-        {
             Console.WriteLine("Sorry, you entered a non-numeric value, please try again.");
-        }
+
         else if (numericValue < 5 || numericValue > 10)
-        {
             Console.Write($"You enetered {numericValue}. Please enter a number between 5 and 10.");
-        }
+
         else
         {
             inputValid = true;
@@ -54,24 +51,28 @@ string adminRole   = "administrator";
 string managerRole = "manager";
 string userRole    = "user";
 
+Console.WriteLine("Enter your role: Administrator, Manager or User.");
+
 do
 {
-    Console.WriteLine("Enter your role: Administrator, Manager or User.");
-
     userInput = Console.ReadLine();
-    string inputCleaned = userInput!.Trim().ToLower();
 
-    if (inputCleaned == adminRole || inputCleaned == managerRole || inputCleaned == userRole)
-    {
-        validRole = true;
-        Console.WriteLine($"Your input value ({inputCleaned}) has been accepted.");
-    }
-    else if (validRole == false)
-    {
-        Console.WriteLine($"The role name that you entered, \"{inputCleaned}\" is not valid.");
-    }
+    if (string.IsNullOrWhiteSpace(userInput))
+        Console.WriteLine("Cannot be left blank.");
     
-} while (!validRole);
+    else
+    {
+        string inputCleaned = userInput!.Trim().ToLower();
+
+        if (inputCleaned == roleAdministrator || inputCleaned == roleManager || inputCleaned == roleUser)
+        {
+            validInput = true;
+            Console.WriteLine($"Your input value ({inputCleaned}) has been accepted.");
+        }
+        else
+            Console.WriteLine($"The role name you entered, \"{inputCleaned}\" is not valid.");
+    }
+} while (!validInput);
 
 #nullable disable
 
